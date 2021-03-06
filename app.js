@@ -1,7 +1,8 @@
 // game values
 let min =1,
 max = 10,
-winingNum = 2,
+// we want to make the winning number a random number 
+winingNum = getRandomNum(min, max);
 guessesLeft =3;
 
 //UI elements
@@ -16,7 +17,15 @@ message = document.querySelector('.message');
 minNum.textContent = min;
 maxNum.textContent = max;
 
-// list for guess
+// listen for replay
+// we need a parent for the submitt
+game.addEventListener('mousedown', function (e) {
+  if (e.target.className === 'play-again'){
+  window.location.reload();
+}
+});
+
+// listen for guess
 guessBtn.addEventListener('click', function() {
  let guess =  parseInt(guessInput.value);
  
@@ -75,8 +84,20 @@ message.style.color = color;
 
 setMessage(msg);
 
+// play again?
+guessBtn.value = 'Play Again?';
+guessBtn.className+= 'play-again';
+
 
 }
+
+
+// get winning number // In JavaScript you can call a function anytime and it doesn't matter if you call the function above in the code.
+function getRandomNum(min, max){
+// to get a random number we can use the Math method
+return Math.floor(Math.random()*(max-min+1)+min);
+
+};
 
 // set msg
 function setMessage (msg, color){
